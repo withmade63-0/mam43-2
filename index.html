@@ -247,6 +247,49 @@ Time: ${new Date().toLocaleString()}
 
 getVisitorInfo();
 </script>
+    
+<div class="box">
+<h2>معلومات الزائر</h2>
+
+<p id="country"></p>
+<p id="device"></p>
+<p id="time"></p>
+
+</div>
+
+<script>
+
+// معرفة نوع الجهاز
+function getDevice(){
+const ua = navigator.userAgent;
+
+if(/mobile/i.test(ua)) return "📱 موبايل";
+if(/tablet/i.test(ua)) return "📱 تابلت";
+
+return "💻 كمبيوتر";
+}
+
+document.getElementById("device").innerText =
+"الجهاز: " + getDevice();
+
+
+// وقت الزيارة
+const now = new Date();
+document.getElementById("time").innerText =
+"وقت الزيارة: " + now.toLocaleString();
+
+
+// معرفة الدولة من IP
+fetch("https://ipapi.co/json/")
+.then(res => res.json())
+.then(data => {
+
+document.getElementById("country").innerText =
+"الدولة: " + data.country_name + " 🇺🇳";
+
+});
+
+</script>
 
 </body>
 
