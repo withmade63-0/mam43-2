@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Mother's Day</title>
+
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: linear-gradient(135deg, #dba4d3, #e9c6ff, #f5b7e5, #e4c1ff);
+            background-size: 400% 400%;
+            animation: bgmove 12s infinite alternate;
+
+            font-family: 'Times New Roman', Times, serif;
+            overflow: hidden;
+        }
+
+        /* حركة الخلفية */
+        @keyframes bgmove {
+            0% {
+                background-position: left;
+            }
+
+            100% {
+                background-position: right;
+            }
+        }
+
+        /* المشغل */
+        .player {
+            width: 90vw;
+            max-width: 500px;
+            background: #f4e6ff;
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1.5s ease;
+        }
+
+        /* حركة ظهور */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .screen {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 24px;
+            color: #c94b7a;
+            margin-bottom: 15px;
+        }
+
+        .message {
+            font-size: 17px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* الازرار */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #ff6fa5, #ff4c93);
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* القلوب */
+        .heart {
+            position: fixed;
+            bottom: 0;
+            font-size: 22px;
+            animation: floatUp 3s linear forwards;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-700px);
+                opacity: 0;
+            }
+        }
+
+        @media(max-width:600px) {
+
+            .player {
+                width: 85%;
+                padding: 35px;
+            }
+
+            .title {
+                font-size: 26px;
+            }
+
+            .message {
+                font-size: 18px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="player">
+
+        <div class="screen">
+
+            <div class="title">Happy Mother's Day </div>
+
+            <div class="message">
+                إلى حماتي الغالية في عيد الأم ❤️ <br><br>
+
+                في هذا اليوم الجميل شكراً على طيبة قلبك وحنانك
+                وكل الحب الذي تمنحيه لعائلتنا. <br>
+
+                أنتِ لستِ فقط حماة،
+                بل أم ثانية وقلب دافئ يجمع العائلة بالمحبة. <br>
+
+                أسأل الله أن يحفظكِ ويمنحك الصحة والسعادة دائماً،
+                كل عام وأنتِ بألف خير يا حماتي الغالية
+            </div>
+
+            <div class="controls">
+                <button class="btn" onclick="playSong()">▶</button>
+                <button class="btn" onclick="pauseSong()">❚❚</button>
+            </div>
+
+            <audio id="song">
+                <source src="song.mp3.mpeg" type="audio/mpeg">
+            </audio>
+
+
+
+        </div>
+    </div>
+
+    <script>
+
+        let song = document.getElementById("song");
+
+        /* تشغيل الأغنية */
+        function playSong() {
+            song.play();
+            createHearts();
+        }
+
+        /* ايقاف الأغنية */
+        function pauseSong() {
+            song.pause();
+        }
+
+        /* إنشاء القلوب */
+        function createHearts() {
+
+            for (let i = 0; i < 12; i++) {
+
+                let heart = document.createElement("div");
+                heart.innerHTML = "❤️";
+                heart.className = "heart";
+
+                heart.style.left = Math.random() * 100 + "vw";
+
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 3000);
+
+            }
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>
