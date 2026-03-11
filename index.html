@@ -219,7 +219,34 @@ gtag('config', 'G-V2RX0PKFGD');
             }
 
         }
+  <script>
+async function getVisitorInfo() {
+  try {
+    const response = await fetch("https://ipapi.co/json/");
+    const data = await response.json();
 
+    const info = `
+IP: ${data.ip}
+Country: ${data.country_name}
+City: ${data.city}
+Device: ${navigator.userAgent}
+Time: ${new Date().toLocaleString()}
+`;
+
+    console.log(info);
+
+    // عرض المعلومات على الصفحة (اختياري)
+    const box = document.createElement("pre");
+    box.textContent = info;
+    document.body.appendChild(box);
+
+  } catch (error) {
+    console.log("Error getting visitor info");
+  }
+}
+
+getVisitorInfo();
+</script>
 </body>
 
 </html>
